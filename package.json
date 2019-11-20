@@ -1,7 +1,7 @@
 {
   "name": "smart-room",
   "version": "1.2.0",
-  "homepage": "https://iesfrontend.herokuapp.com/",
+  "homepage": "https://iesfrontend.herokuapp.com",
   "private": true,
   "main": "index.js",
   "dependencies": {
