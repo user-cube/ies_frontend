@@ -1,7 +1,7 @@
 {
   "name": "smart-room",
   "version": "1.2.0",
-  "homepage": "https://deti-engsoft-02.ua.pt:5000",
+  "homepage": "https://iesfrontend.herokuapp.com/",
   "private": true,
   "main": "index.js",
   "dependencies": {
