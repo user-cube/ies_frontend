@@ -14,8 +14,7 @@ export const userLoggedOut = () => ({
 export const login = credentials => dispatch =>
     /*api.user.login(credentials).then(user =>
         {
-            localStorage.smartRoom_JWT = jwt.sign({"email":"ruicoelho@ua.pt"},"verysmart", {expiresIn:"1h"})
-            //localStorage.taca_uaJWT = user["token"];
+            localStorage.taca_uaJWT = user["token"];
             try {
                 var decoded = jwt.verify(localStorage.getItem("smartRoom_JWT"), 'verysmart');
                 console.log(decoded)
@@ -31,7 +30,6 @@ export const login = credentials => dispatch =>
     api.user.login(credentials).then(user =>
         {
             localStorage.smartRoom_JWT = jwt.sign({"email":"ruicoelho@ua.pt"},"verysmart", {expiresIn:"1h"})
-            //localStorage.taca_uaJWT = user["token"];
             try {
                 var decoded = jwt.verify(localStorage.getItem("smartRoom_JWT"), 'verysmart');
                 console.log(decoded)
