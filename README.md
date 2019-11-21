@@ -24,7 +24,7 @@ Para que isto seja feito, um container na VM que nos foi fornecida não permite 
 ## Frontend
 Este repositório tem integração CI/CD. A parte de CI é tratada pelo Github Actions e a parte de CD é tratada pelo Heroku, podendo ser a aplicação web encontrada <a href="https://iesfrontend.herokuapp.com/login" target='_blank'>aqui</a>.
 
-## Especificação
+### Especificação
 * Desenvolvido em React + Node;
 * Contém PWA;
 * Necssita de credenciais para o login.
