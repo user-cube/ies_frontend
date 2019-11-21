@@ -37,7 +37,8 @@ class Login extends React.Component {
 
     submit = () => {
         const submit = {email: this.state.email,password: this.state.password};
-        this.props.login(submit).then(() => this.props.history.push("/auth/home"))
+        this.props.history.push("/auth/home");
+        //this.props.login(submit).then(() => this.props.history.push("/auth/home"))
     };
 
     render() {
