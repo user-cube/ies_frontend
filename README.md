@@ -25,6 +25,10 @@ Para que isto seja feito, um container na VM que nos foi fornecida não permite 
 ## Frontend
 Este repositório tem integração CI/CD. A parte de CI é tratada pelo Github Actions e a parte de CD é tratada pelo Heroku, podendo ser a aplicação web encontrada <a href="https://iesfrontend.herokuapp.com/login" target='_blank'>aqui</a>.
 
+### Deploy do protótipo
+O deploy do protótipo pode ser encontrado <a href='deti-engsoft-02.ua.pt:5000'>aqui</a>.<br>
+**Nota:** É necessário estar conectado na rede da UA (ou VPN) para aceder ao mesmo.
+
 ### Especificação
 * Desenvolvido em React + Node;
 * Contém PWA;
