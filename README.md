@@ -14,15 +14,22 @@ Aliado a uma dashboard todos os dados podem ser analisados em gráficos intuitiv
 * [Repostório de referência](https://github.com/user-cube/Smart_Room)
 * [Frontend](https://github.com/user-cube/ies_frontend)
 
-## Links
+### Justificação da utilização de vários repostórios
+Tal como foi definido na arquitetura do projeto, dissemos que íamos criar uma pwa baseada na aplicação web, para a criação de uma pwa, a Google exige:
+* Seja acessível nos seus servidores de criação
+* Esteja em HTTPS
+* Quando feita em react usar a versão `production build`
+Para que isto seja feito, um container na VM que nos foi fornecida não permite que a mesma seja criada.
 
-### Backlog
-Para o backlog optamos pelo Pivotal Tracker o mesmo pode ser acedido <a href="https://www.pivotaltracker.com/n/projects/2410465">aqui</a>.
+## Frontend
+Este repositório tem integração CI/CD. A parte de CI é tratada pelo Github Actions e a parte de CD é tratada pelo Heroku, podendo ser a aplicação web encontrada <a href="https://iesfrontend.herokuapp.com/login" target='_blank'>aqui</a>.
 
-### Documentos
-Os documentos do projeto podem ser encontrados na pasta da Google Drive, contém sempre a versão mais atualizada dos mesmos uma vez que a ferramenta definida para a escrita de relatórios foi o Google Docs, a pasta encontra-se <a href="https://drive.google.com/drive/folders/1Q3gWHAxaBDn8KbCLEB_KCepWUc4GiT_G?usp=sharing">aqui</a>.
+## Especificação
+* Desenvolvido em React + Node;
+* Contém PWA;
+* Necssita de credenciais para o login.
 
-## Front-End
+### Estado do frontend
 <img src="presentation/Home.png">
 <img src="presentation/Acessos.png">
 <img src="presentation/CO2.png">
