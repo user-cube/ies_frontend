@@ -19,6 +19,7 @@ Tal como foi definido na arquitetura do projeto, dissemos que íamos criar uma p
 * Seja acessível nos seus servidores de criação
 * Esteja em HTTPS
 * Quando feita em react usar a versão `production build`
+
 Para que isto seja feito, um container na VM que nos foi fornecida não permite que a mesma seja criada.
 
 ## Frontend
