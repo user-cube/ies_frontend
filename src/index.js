@@ -25,13 +25,13 @@ const store = createStore(
 
 if (token != null) {
     try {
-        var decoded = jwt.verify(token, 'verysmart');
+        var decoded = jwt.verify(token, 'ThisIsSecretForJWTHS512SignatureAlgorithmThatMUSTHave512bitsKeySize');
         console.log(decoded)
         const user = {
-            email: decoded["email"]
+            email: decoded.email
         }
         store.dispatch(userLoggedIn(user));
-    } catch(err) {
+    } catch (err) {
         console.log(err)
     }
 }
