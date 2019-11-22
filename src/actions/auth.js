@@ -12,26 +12,11 @@ export const userLoggedOut = () => ({
 });
 
 export const login = credentials => dispatch =>
-    /*api.user.login(credentials).then(user =>
+    api.user.login(credentials).then(token =>
         {
-            localStorage.taca_uaJWT = user["token"];
+            localStorage.smartRoom_JWT = token;
             try {
-                var decoded = jwt.verify(localStorage.getItem("smartRoom_JWT"), 'verysmart');
-                console.log(decoded)
-                const user = {
-                    email: decoded.email
-                }
-                dispatch(userLoggedIn(user));
-            } catch(err) {
-                console.log(err)
-            }
-        }
-    );*/
-    api.user.login(credentials).then(user =>
-        {
-            localStorage.smartRoom_JWT = jwt.sign({"email":"ruicoelho@ua.pt"},"verysmart", {expiresIn:"1h"})
-            try {
-                var decoded = jwt.verify(localStorage.getItem("smartRoom_JWT"), 'verysmart');
+                var decoded = jwt.verify(localStorage.getItem("smartRoom_JWT"), 'ThisIsSecretForJWTHS512SignatureAlgorithmThatMUSTHave512bitsKeySize');
                 console.log(decoded)
                 const user = {
                     email: decoded.email
