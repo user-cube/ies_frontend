@@ -26,7 +26,6 @@ const store = createStore(
 if (token != null) {
     try {
         var decoded = jwt.verify(token, 'ThisIsSecretForJWTHS512SignatureAlgorithmThatMUSTHave512bitsKeySize');
-        console.log(decoded)
         const user = {
             email: decoded.email
         }
