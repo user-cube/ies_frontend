@@ -1,4 +1,5 @@
-import { lazy } from "react";
+import {lazy} from "react";
+
 const Home = lazy(() => import("views/Home.jsx"));
 const Logout = lazy(() => import("views/Logout.jsx"));
 const Acessos = lazy(() => import("views/Acessos.jsx"));

@@ -1,6 +1,5 @@
-
-import React, { Suspense } from "react";
-import { Route, Switch, Redirect } from "react-router-dom";
+import React, {Suspense} from "react";
+import {Route, Switch, Redirect} from "react-router-dom";
 import PerfectScrollbar from "perfect-scrollbar";
 import {Swipeable} from "react-swipeable";
 
@@ -19,7 +18,7 @@ function WaitingComponent(Component) {
     return props => (
         <Suspense fallback={
             <div class="full-page-loader">
-                <img width="200" src="smart-room.png" alt="Smart Room" />
+                <img width="200" src="smart-room.png" alt="Smart Room"/>
             </div>
         }>
             <Component {...props} />
@@ -38,12 +37,11 @@ class Layout extends React.Component {
     }
 
 
-
     componentDidMount() {
         if (navigator.platform.indexOf("Win") > -1) {
             document.documentElement.className += " perfect-scrollbar-on";
             document.documentElement.classList.remove("perfect-scrollbar-off");
-            ps = new PerfectScrollbar(this.refs.mainPanel, { suppressScrollX: true });
+            ps = new PerfectScrollbar(this.refs.mainPanel, {suppressScrollX: true});
             let tables = document.querySelectorAll(".table-responsive");
             for (let i = 0; i < tables.length; i++) {
                 ps = new PerfectScrollbar(tables[i]);
@@ -58,6 +56,7 @@ class Layout extends React.Component {
             document.documentElement.classList.remove("perfect-scrollbar-on");
         }
     }
+
     componentDidUpdate(e) {
         if (e.history.action === "PUSH") {
             if (navigator.platform.indexOf("Win") > -1) {
@@ -71,10 +70,11 @@ class Layout extends React.Component {
             this.refs.mainPanel.scrollTop = 0;
         }
     }
+
     // this function opens and closes the sidebar on small devices
     toggleSidebar = () => {
         document.documentElement.classList.toggle("nav-open");
-        this.setState({ sidebarOpened: !this.state.sidebarOpened });
+        this.setState({sidebarOpened: !this.state.sidebarOpened});
     };
 
     scrollToTop() {
@@ -86,7 +86,7 @@ class Layout extends React.Component {
     getRoutes = routes => {
         return routes.map((prop, key) => {
             if (prop.redirect)
-                return <Redirect from={prop.path} to={prop.to} key={key} />;
+                return <Redirect from={prop.path} to={prop.to} key={key}/>;
             return (
                 <Route
                     path={prop.path}
@@ -98,7 +98,7 @@ class Layout extends React.Component {
     };
 
     handleBgClick = color => {
-        this.setState({ backgroundColor: color });
+        this.setState({backgroundColor: color});
     };
 
     getBrandText = path => {
@@ -164,10 +164,10 @@ class Layout extends React.Component {
                             sidebarOpened={this.state.sidebarOpened}
                         />
                         <Switch>{this.getRoutes(routes)}</Switch>
-                        <Footer fluid />
+                        <Footer fluid/>
                     </div>
                 </div>
-                <TopPlugin scrollToTop={this.scrollToTop} />
+                <TopPlugin scrollToTop={this.scrollToTop}/>
             </>
         );
     }

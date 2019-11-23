@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Button } from 'reactstrap';
+import {Button} from 'reactstrap';
 
 // react component for creating dynamic tables
 import ReactTable from "react-table";
@@ -45,7 +45,7 @@ class AddAccessTable extends React.Component {
                 },
             ]
         };
-        this.warningAlert =this.warningAlert.bind(this)
+        this.warningAlert = this.warningAlert.bind(this)
     }
 
     handleEdit = (equipa) => {
@@ -58,7 +58,7 @@ class AddAccessTable extends React.Component {
     }
 
     componentDidMount() {
-        this.setState({ equipas: this.props.dados });
+        this.setState({equipas: this.props.dados});
     }
 
     componentDidUpdate(prevProps) {
@@ -67,78 +67,78 @@ class AddAccessTable extends React.Component {
         }
     }
 
-    warningAlert(equipa){
+    warningAlert(equipa) {
         this.setState({
             alert: (
                 <SweetAlert
-                  warning
-                  showCancel
-                  style={{display: "block"}}
-                  confirmBtnText="Yes, delete it!"
-                  confirmBtnBsStyle="danger"
-                  cancelBtnBsStyle="default"
-                  title="Are you sure?"
-                  onConfirm={() => this.handleRemove(equipa)}
-                  onCancel={() => this.setState({alert: null})}
+                    warning
+                    showCancel
+                    style={{display: "block"}}
+                    confirmBtnText="Yes, delete it!"
+                    confirmBtnBsStyle="danger"
+                    cancelBtnBsStyle="default"
+                    title="Are you sure?"
+                    onConfirm={() => this.handleRemove(equipa)}
+                    onCancel={() => this.setState({alert: null})}
                 >
-                  You will not be able to recover!
+                    You will not be able to recover!
                 </SweetAlert>
             )
         });
-      }
+    }
 
     filterMethod = (filter, row, column) => {
         const id = filter.pivotId || filter.id
         return row[id] !== undefined ? String(row[id].toLowerCase()).startsWith(filter.value.toLowerCase()) : true
     }
 
-  render() {
-    return (
-      <>
-        <ReactTable
-            data={this.state.equipas.map((equipa,index) => {
-                return({
-                    team: equipa["equipa"],
-                    logo: equipa["logo"],
-                    mod: equipa["modalidades"].join(", "),
-                    nuc: equipa["nucleo"],
-                    sige: equipa["siglaE"],
-                    sign: equipa["siglaN"],
-                    actions: (
-                        <div className="actions-center">
-                          <Button
-                            onClick={() => this.handleEdit(equipa)}
-                            color="warning"
-                            size="sm"
-                            className="btn-icon btn-link edit"
-                          >
-                            <i className="fa fa-edit" />
-                          </Button>{" "}
-                          <Button
-                            onClick={() => this.warningAlert(equipa)}
-                            color="danger"
-                            size="sm"
-                            className="btn-icon btn-link remove"
-                          >
-                            <i className="fa fa-times" />
-                          </Button>{" "}
-                        </div>
-                      )
-                })
-            })}
-            noDataText="Sem Dados"
-            columns={this.state.colums}
-            defaultPageSize={10}
-            showPaginationTop={true}
-            showPaginationBottom={false}
-            defaultFilterMethod={this.filterMethod}
-            resizable={false}
-            className="-striped -highlight -pagination"
-        />
-        {this.state.alert}
-      </>
-    );
-  }
+    render() {
+        return (
+            <>
+                <ReactTable
+                    data={this.state.equipas.map((equipa, index) => {
+                        return ({
+                            team: equipa["equipa"],
+                            logo: equipa["logo"],
+                            mod: equipa["modalidades"].join(", "),
+                            nuc: equipa["nucleo"],
+                            sige: equipa["siglaE"],
+                            sign: equipa["siglaN"],
+                            actions: (
+                                <div className="actions-center">
+                                    <Button
+                                        onClick={() => this.handleEdit(equipa)}
+                                        color="warning"
+                                        size="sm"
+                                        className="btn-icon btn-link edit"
+                                    >
+                                        <i className="fa fa-edit"/>
+                                    </Button>{" "}
+                                    <Button
+                                        onClick={() => this.warningAlert(equipa)}
+                                        color="danger"
+                                        size="sm"
+                                        className="btn-icon btn-link remove"
+                                    >
+                                        <i className="fa fa-times"/>
+                                    </Button>{" "}
+                                </div>
+                            )
+                        })
+                    })}
+                    noDataText="Sem Dados"
+                    columns={this.state.colums}
+                    defaultPageSize={10}
+                    showPaginationTop={true}
+                    showPaginationBottom={false}
+                    defaultFilterMethod={this.filterMethod}
+                    resizable={false}
+                    className="-striped -highlight -pagination"
+                />
+                {this.state.alert}
+            </>
+        );
+    }
 }
 
 export default AddAccessTable;
