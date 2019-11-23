@@ -17,7 +17,6 @@ export const login = credentials => dispatch =>
             localStorage.smartRoom_JWT = token;
             try {
                 var decoded = jwt.verify(localStorage.getItem("smartRoom_JWT"), 'ThisIsSecretForJWTHS512SignatureAlgorithmThatMUSTHave512bitsKeySize');
-                console.log(decoded)
                 const user = {
                     email: decoded.email
                 }
