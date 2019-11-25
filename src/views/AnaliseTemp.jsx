@@ -1,7 +1,7 @@
 import React from "react";
 
 // reactstrap components
-import {Card, CardHeader, CardBody, Row, Col, Button, CardTitle} from "reactstrap";
+import {Card, CardHeader, CardBody, Row, CardTitle} from "reactstrap";
 import NotificationAlert from "react-notification-alert";
 import {Line} from "react-chartjs-2";
 import axios from "axios";
