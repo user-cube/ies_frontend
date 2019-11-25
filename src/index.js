@@ -31,7 +31,7 @@ if (token != null) {
         }
         store.dispatch(userLoggedIn(user));
     } catch (err) {
-        //console.log(err)
+        console.log(err)
     }
 }
 

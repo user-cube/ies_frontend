@@ -12,9 +12,7 @@ import {
 
 // core components
 import {
-    chartExample2,
     chartExample3,
-    chartExample4
 } from "../variables/charts.jsx";
 
 

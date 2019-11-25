@@ -12,8 +12,6 @@ class Temperatura extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            modalAdd: false,
-            modalEdit: false,
             Temperatura: [],
             color: "navbar-transparent",
         };
