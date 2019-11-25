@@ -5,6 +5,8 @@ const Logout = lazy(() => import("views/Logout.jsx"));
 const Acessos = lazy(() => import("views/Acessos.jsx"));
 const CO2 = lazy(() => import("views/CO2.jsx"));
 const Temperatura = lazy(() => import("views/Temperatura.jsx"));
+const AnaliseTemp = lazy(() => import("views/AnaliseTemp.jsx"));
+const AnaliseCO2 = lazy(() => import("views/AnaliseCO2.jsx"));
 
 var routes = [
     {
@@ -20,17 +22,29 @@ var routes = [
         sidebar: true,
         icon: "fas fa-user-cog",
         component: Acessos,
+    },{
+        path: "/auth/analiseCO2",
+        name: "Análise de CO2",
+        sidebar: true,
+        icon: "fas fa-cloud",
+        component: AnaliseCO2,
     },
     {
         path: "/auth/co2",
-        name: "CO2",
+        name: "Políticas de CO2",
         sidebar: true,
         icon: "fas fa-cloud",
         component: CO2,
+    },{
+        path: "/auth/analiseTemp",
+        name: "Análise de Temperatura",
+        sidebar: true,
+        icon: "fas fa-thermometer-full",
+        component: AnaliseTemp,
     },
     {
         path: "/auth/temperatura",
-        name: "Temperatura",
+        name: "Políticas de Temperatura",
         sidebar: true,
         icon: "fas fa-thermometer-full",
         component: Temperatura,
