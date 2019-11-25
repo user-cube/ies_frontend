@@ -16,7 +16,7 @@ import {
 } from "../variables/charts.jsx";
 
 
-import LastGamesTables from "components/Tables/LastAccessTable.jsx";
+import LastAcessos from "components/Tables/LastAccessTable.jsx";
 
 class Home extends React.Component {
     constructor(props) {
@@ -83,7 +83,7 @@ class Home extends React.Component {
                                 </CardHeader>
                                 <CardBody>
                                     <div className="chart-area">
-                                        <LastGamesTables jogosLast={this.state.jogosLast} logos={this.state.logos} />
+                                        <LastAcessos jogosLast={this.state.jogosLast} logos={this.state.logos} />
                                     </div>
                                 </CardBody>
                             </Card>
