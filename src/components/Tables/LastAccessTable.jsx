@@ -83,7 +83,7 @@ class LastAccessTable extends React.Component {
                 <ReactTable
                     noDataText="Sem Dados"
                     columns={this.state.colums}
-                    ///pageSize={(this.state.jogos.length === 0) ? 3 : this.state.jogos.length + 1}
+                    pageSize={(0 === 0) ? 3 : this.state.jogos.length + 1}
                     showPaginationTop={false}
                     showPaginationBottom={false}
                     resizable={false}
