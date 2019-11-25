@@ -33,25 +33,33 @@ class Home extends React.Component {
 
         var token = localStorage.getItem("smartRoom_JWT");
 
-        axios.get('http://deti-engsoft-02.ua.pt:3000/co2/getByDate/2019-11-20', { headers: {"Authorization" : `Bearer ${token}`} })
+        axios.get('http://deti-engsoft-02.ua.pt:3000/co2/today', { headers: {"Authorization" : `Bearer ${token}`} })
             .then(res => {
-                const co2 = res.data;
+                var co2 = [];
+                co2 = res.data;
+                if (co2.length === 0){
+                    co2 = []
+                }
                 let lista_labels = [];
                 let lista_values = [];
                 co2.forEach(valor => {
-                    lista_labels.push(valor["time"])
+                    lista_labels.push(valor["time"].split(".")[0])
                     lista_values.push(valor["co2"])
                 })
                 this.setState({co2_labels: lista_labels, co2_values: lista_values});
             });
 
-        axios.get('http://deti-engsoft-02.ua.pt:3000/temperature/getByDate/2019-11-20', { headers: {"Authorization" : `Bearer ${token}`} })
+        axios.get('http://deti-engsoft-02.ua.pt:3000/temperature/today', { headers: {"Authorization" : `Bearer ${token}`} })
             .then(res => {
-                const temp = res.data;
+                var temp = [];
+                temp = res.data;
+                if (temp.length === 0){
+                    temp = []
+                }
                 let lista_labels = [];
                 let lista_values = [];
                 temp.forEach(valor => {
-                    lista_labels.push(valor["time"])
+                    lista_labels.push(valor["time"].split(".")[0])
                     lista_values.push(valor["temp"])
                 })
                 this.setState({temp_labels: lista_labels, temp_values: lista_values});
@@ -75,7 +83,7 @@ class Home extends React.Component {
                                 </CardHeader>
                                 <CardBody>
                                     <div className="chart-area">
-                                        <LastGamesTables jogosLast={this.state.jogosLast} logos={this.state.logos}/>
+                                        <LastGamesTables jogosLast={this.state.jogosLast} logos={this.state.logos} />
                                     </div>
                                 </CardBody>
                             </Card>
@@ -170,6 +178,7 @@ class Home extends React.Component {
                                                         ]
                                                     }
                                                 }}
+
                                             />
                                         </div>
                                     </div>
