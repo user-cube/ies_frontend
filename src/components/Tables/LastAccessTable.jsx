@@ -64,13 +64,13 @@ class LastAccessTable extends React.Component {
         };
     }
 
-    componentDidMount(){
+    componentDidMount() {
         this.setState({
             jogos: this.props.jogosLast,
             logos: this.props.logos
         })
     }
-    
+
     componentDidUpdate(prevProps) {
         if (this.props.jogosLast !== prevProps.jogosLast) {
             this.setState({jogos: this.props.jogosLast});
@@ -79,17 +79,17 @@ class LastAccessTable extends React.Component {
 
     render() {
         return (
-        <>
-            <ReactTable
-                noDataText="Sem Dados"
-                columns={this.state.colums}
-                pageSize={(this.state.jogos.length === 0) ? 3 : this.state.jogos.length+1}
-                showPaginationTop={false}
-                showPaginationBottom={false}
-                resizable={false}
-                className="-striped -highlight primary-pagination"
-            />
-        </>
+            <>
+                <ReactTable
+                    noDataText="Sem Dados"
+                    columns={this.state.colums}
+                    ///pageSize={(this.state.jogos.length === 0) ? 3 : this.state.jogos.length + 1}
+                    showPaginationTop={false}
+                    showPaginationBottom={false}
+                    resizable={false}
+                    className="-striped -highlight primary-pagination"
+                />
+            </>
         );
     }
 }

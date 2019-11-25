@@ -12,8 +12,7 @@ export const userLoggedOut = () => ({
 });
 
 export const login = credentials => dispatch =>
-    api.user.login(credentials).then(token =>
-        {
+    api.user.login(credentials).then(token => {
             localStorage.smartRoom_JWT = token;
             try {
                 var decoded = jwt.verify(localStorage.getItem("smartRoom_JWT"), 'ThisIsSecretForJWTHS512SignatureAlgorithmThatMUSTHave512bitsKeySize');
@@ -21,8 +20,8 @@ export const login = credentials => dispatch =>
                     email: decoded.email
                 }
                 dispatch(userLoggedIn(user));
-            } catch(err) {
-                console.log(err)
+            } catch (err) {
+                //console.log(err)
             }
         }
     );

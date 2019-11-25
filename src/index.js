@@ -1,13 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { BrowserRouter, Switch } from "react-router-dom";
+import {BrowserRouter, Switch} from "react-router-dom";
 import * as serviceWorker from 'serviceWorker';
-import { createStore, applyMiddleware} from "redux";
-import { Provider } from "react-redux";
+import {createStore, applyMiddleware} from "redux";
+import {Provider} from "react-redux";
 import thunk from "redux-thunk";
 import jwt from 'jsonwebtoken';
 import {userLoggedIn} from "actions/auth.js";
-import { composeWithDevTools } from "redux-devtools-extension";
+import {composeWithDevTools} from "redux-devtools-extension";
 import rootReducer from "rootReducer";
 import routes from "routes/routes_index";
 import routesProtected from "routes/routesProtected_index";
@@ -31,7 +31,7 @@ if (token != null) {
         }
         store.dispatch(userLoggedIn(user));
     } catch (err) {
-        console.log(err)
+        //console.log(err)
     }
 }
 
@@ -41,7 +41,7 @@ ReactDOM.render(
             <Switch>
                 {
                     routesProtected.map(
-                        (prop,key) => {
+                        (prop, key) => {
                             return (
                                 <Auth path={prop.path} component={prop.component} key={key}/>
                             )
@@ -50,7 +50,7 @@ ReactDOM.render(
                 }
                 {
                     routes.map(
-                        (prop,key) => {
+                        (prop, key) => {
                             return (
                                 <NoAuth path={prop.path} component={prop.component} key={key}/>
                             )

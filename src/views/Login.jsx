@@ -50,7 +50,7 @@ class Login extends React.Component {
                                 <Card className="card-login card-white">
                                     <CardHeader>
                                         <CardTitle>
-                                            <h1 className="text-dark">Log In</h1>
+                                            <span className="text-dark">Log In</span>
                                         </CardTitle>
                                     </CardHeader>
                                     <CardBody>
