@@ -19,7 +19,7 @@ class Temperatura extends React.Component {
 
         var token = localStorage.getItem("smartRoom_JWT");
 
-        axios.get('http://deti-engsoft-02.ua.pt:3000/temperature/averageWeek', { headers: {"Authorization" : `Bearer ${token}`} })
+        axios.get('https://iesapi.herokuapp.com/temperature/averageWeek', { headers: {"Authorization" : `Bearer ${token}`} })
             .then(res => {
                 const temp = res.data;
                 let lista_labels = [];
