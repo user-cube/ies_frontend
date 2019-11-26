@@ -33,7 +33,7 @@ var routes = [
         path: "/auth/analiseCO2",
         name: "Análise de CO2",
         sidebar: true,
-        icon: "fas fa-cloud",
+        icon: "fab fa-cloudversify",
         component: AnaliseCO2,
     },
     {
@@ -46,7 +46,7 @@ var routes = [
         path: "/auth/analiseTemp",
         name: "Análise de Temperatura",
         sidebar: true,
-        icon: "fas fa-thermometer-full",
+        icon: "fas fa-temperature-high",
         component: AnaliseTemp,
     },
     {
