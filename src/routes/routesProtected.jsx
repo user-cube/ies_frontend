@@ -7,6 +7,7 @@ const CO2 = lazy(() => import("views/CO2.jsx"));
 const Temperatura = lazy(() => import("views/Temperatura.jsx"));
 const AnaliseTemp = lazy(() => import("views/AnaliseTemp.jsx"));
 const AnaliseCO2 = lazy(() => import("views/AnaliseCO2.jsx"));
+const AnaliseAcessos = lazy(() => import("views/AnaliseAcessos.jsx"));
 
 var routes = [
     {
@@ -15,6 +16,12 @@ var routes = [
         sidebar: true,
         icon: "fas fa-home",
         component: Home,
+    },{
+        path: "/auth/analiseAcessos",
+        name: "Análise de acessos",
+        sidebar: true,
+        icon: "fas fa-user-lock",
+        component: AnaliseAcessos,
     },
     {
         path: "/auth/acessos",

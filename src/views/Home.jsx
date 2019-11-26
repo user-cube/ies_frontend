@@ -62,7 +62,7 @@ class Home extends React.Component {
                 this.setState({temp_labels: lista_labels, temp_values: lista_values});
             });
 
-        axios.get('http://localhost:3000/access/today', {headers: {"Authorization": `Bearer ${token}`}})
+        axios.get('http://deti-engsoft-02.ua.pt:3000/access/today', {headers: {"Authorization": `Bearer ${token}`}})
             .then(res => {
                 var access = [];
                 access = res.data;
