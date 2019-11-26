@@ -19,14 +19,16 @@ class Temperatura extends React.Component {
 
         var token = localStorage.getItem("smartRoom_JWT");
 
-        axios.get('http://deti-engsoft-02.ua.pt:3000/temperature/getAll', { headers: {"Authorization" : `Bearer ${token}`} })
+        axios.get('http://deti-engsoft-02.ua.pt:3000/temperature/averageWeek', { headers: {"Authorization" : `Bearer ${token}`} })
             .then(res => {
                 const temp = res.data;
                 let lista_labels = [];
                 let lista_values = [];
                 temp.forEach(valor => {
-                    lista_labels.push(valor["time"].split(".")[0])
-                    lista_values.push(valor["temp"])
+                    if (valor['average'] !== "null") {
+                        lista_labels.push(valor["period"])
+                        lista_values.push(valor["average"])
+                    }
                 })
                 this.setState({temp_labels: lista_labels, temp_values: lista_values});
             });
