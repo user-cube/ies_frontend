@@ -8,20 +8,11 @@ class LastAccessTable extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            jogos: props.jogosLast,
+            acessos: props.acessosX,
             colums: [
                 {
-                    Header: 'Data',
-                    accessor: 'data',
-                    sortable: false,
-                    minWidth: 130,
-                    style: {
-                        textAlign: "center",
-                        height: "50px",
-                    }
-                }, {
-                    Header: 'Hora',
-                    accessor: 'hora',
+                    Header: 'Ocorrência',
+                    accessor: 'timestamp',
                     sortable: false,
                     minWidth: 130,
                     style: {
@@ -30,7 +21,7 @@ class LastAccessTable extends React.Component {
                     }
                 }, {
                     Header: 'Responsável',
-                    accessor: 'team1',
+                    accessor: 'user',
                     sortable: false,
                     minWidth: 200,
                     style: {
@@ -40,7 +31,7 @@ class LastAccessTable extends React.Component {
                     }
                 }, {
                     Header: 'Ação',
-                    accessor: 'team1',
+                    accessor: 'action',
                     sortable: false,
                     minWidth: 200,
                     style: {
@@ -50,7 +41,7 @@ class LastAccessTable extends React.Component {
                     }
                 }, {
                     Header: 'Fonte',
-                    accessor: 'team1',
+                    accessor: 'origin',
                     sortable: false,
                     minWidth: 200,
                     style: {
@@ -60,20 +51,18 @@ class LastAccessTable extends React.Component {
                     }
                 }
             ],
-            logos: props.logos,
         };
     }
 
     componentDidMount() {
         this.setState({
-            jogos: this.props.jogosLast,
-            logos: this.props.logos
+            acessos: this.props.acessosX,
         })
     }
 
     componentDidUpdate(prevProps) {
-        if (this.props.jogosLast !== prevProps.jogosLast) {
-            this.setState({jogos: this.props.jogosLast});
+        if (this.props.acessosX !== prevProps.acessosX) {
+            this.setState({acessosX: this.props.acessosX});
         }
     }
 
@@ -82,8 +71,9 @@ class LastAccessTable extends React.Component {
             <>
                 <ReactTable
                     noDataText="Sem Dados"
+                    data={this.props.acessosX}
                     columns={this.state.colums}
-                    pageSize={(0 === 0) ? 3 : this.state.jogos.length + 1}
+                    pageSize={(this.state.acessos.length === 0) ? 5 : this.state.acessosX.length + 1}
                     showPaginationTop={false}
                     showPaginationBottom={false}
                     resizable={false}
