@@ -19,14 +19,16 @@ class AnaliseCO2 extends React.Component {
 
         var token = localStorage.getItem("smartRoom_JWT");
 
-        axios.get('http://deti-engsoft-02.ua.pt:3000/co2/getAll', { headers: {"Authorization" : `Bearer ${token}`} })
+        axios.get('https://iesapi.herokuapp.com/co2/averageWeek', { headers: {"Authorization" : `Bearer ${token}`} })
             .then(res => {
                 const co2 = res.data;
                 let lista_labels = [];
                 let lista_values = [];
                 co2.forEach(valor => {
-                    lista_labels.push(valor["time"].split(".")[0])
-                    lista_values.push(valor["co2"])
+                    if (valor['average'] !== null) {
+                        lista_labels.push(valor["period"])
+                        lista_values.push(valor["average"])
+                    }
                 })
                 this.setState({co2_labels: lista_labels, co2_values: lista_values});
             });

@@ -13,6 +13,7 @@ Aliado a uma dashboard todos os dados podem ser analisados em gráficos intuitiv
 ## Repositórios de referência:
 * [Repostório de referência](https://github.com/user-cube/Smart_Room)
 * [Frontend](https://github.com/user-cube/ies_frontend)
+* [Backend](https://github.com/user-cube/ies_api)
 
 ### Justificação da utilização de vários repostórios
 Tal como foi definido na arquitetura do projeto, dissemos que íamos criar uma pwa baseada na aplicação web, para a criação de uma pwa, a Google exige:
@@ -21,6 +22,11 @@ Tal como foi definido na arquitetura do projeto, dissemos que íamos criar uma p
 * Quando feita em react usar a versão `production build`
 
 Para que isto seja feito, um container na VM que nos foi fornecida não permite que a mesma seja criada.
+
+### CI/CD
+Existen mecanismos de CI/CD implementados.
+No que diz respeito a CI, foi feito integração com o Github Actions que trata de todo o processo de CI.
+O CD ficou a cargo do Heroku que, após o Github Actions dar um parecer positivo, inicia o seu processo de deployment.
 
 ## Frontend
 Este repositório tem integração CI/CD. A parte de CI é tratada pelo Github Actions e a parte de CD é tratada pelo Heroku, podendo ser a aplicação web encontrada <a href="https://iesfrontend.herokuapp.com/login" target='_blank'>aqui</a>.
