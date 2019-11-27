@@ -25,7 +25,7 @@ class Temperatura extends React.Component {
                 let lista_labels = [];
                 let lista_values = [];
                 temp.forEach(valor => {
-                    if (valor['average'] !== "null") {
+                    if (valor['average'] !== null) {
                         lista_labels.push(valor["period"])
                         lista_values.push(valor["average"])
                     }
