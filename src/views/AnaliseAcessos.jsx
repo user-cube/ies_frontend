@@ -5,9 +5,8 @@ import {
     Card,
     CardHeader,
     CardBody,
-    CardTitle,
     Row,
-    Col, Button,
+    Col,
 } from "reactstrap";
 
 import LastAcessos from "components/Tables/Acessos";
