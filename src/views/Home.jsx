@@ -9,6 +9,8 @@ import {
     Row,
     Col,
 } from "reactstrap";
+import NotificationAlert from "react-notification-alert";
+import socketIOClient from "socket.io-client";
 
 import LastAcessos from "components/Tables/LastAccessTable.jsx";
 
@@ -22,12 +24,15 @@ class Home extends React.Component {
             temp_values: [],
             numero_acessos: [],
             pessoas: [],
-            acessos : []
+            acessos : [],
+            endpoint: "https://ies-api.herokuapp.com/endPoint"
         };
+        this.toggle = this.toggle.bind(this);
+        this.notify = this.notify.bind(this);
+        this.handleData = this.handleData.bind(this)
     }
 
     componentDidMount() {
-
         var token = localStorage.getItem("smartRoom_JWT");
 
         axios.get('https://iesapi.herokuapp.com/co2/today', {headers: {"Authorization": `Bearer ${token}`}})
@@ -96,8 +101,43 @@ class Home extends React.Component {
                 }
                 this.setState({pessoas: lista_pessoas, numero_acessos: lista_acessos, acessos: access});
             });
+        this.socket = socketIOClient.connect(this.state.endpoint);
+        this.socket.on("connect", data => this.setState({loading: false}));
+        this.socket.on("message", data => this.handleData("message",data));
+        this.socket.on("change", data => this.handleData("change",data));
+        this.socket.on("obs", data => this.handleData("obs",data));
     }
 
+    notify = (message) => {
+        var type = "warning";
+        var options = {};
+        options = {
+            place: "tr",
+            message: (
+                <div>
+                    <div>
+                        {message}
+                    </div>
+                </div>
+            ),
+            type: type,
+            icon: "fas fa-bell",
+            autoDismiss: 7
+        };
+        this.refs.notificationAlert.notificationAlert(options);
+    };
+
+    handleData = (tipo,data) => {
+        // Processamento de info
+    }
+
+    toggle(tab) {
+        if (this.state.activeTab !== tab) {
+            this.setState({
+                activeTab: tab
+            });
+        }
+    }
     render() {
         return (
             <>
