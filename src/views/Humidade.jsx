@@ -107,7 +107,7 @@ class Acessos extends React.Component {
         })
     }
 
-   editCredential(modalidade) {
+    editCredential(modalidade) {
         this.setState({
             modalEdit: !this.state.modalEdit,
             modalidade: modalidade
@@ -159,7 +159,7 @@ class Acessos extends React.Component {
                 <AddModalidade status={this.state.modalAdd} handleClose={this.toggleModalAdd}
                                handleSave={this.addCredential}/>
                 <EditAcessos status={this.state.modalEdit} handleClose={this.toggleModalEdit}
-                                handleUpdate={this.updateCredential} info={this.state.acesso}/>
+                             handleUpdate={this.updateCredential} info={this.state.acesso}/>
             </>
         );
     }
