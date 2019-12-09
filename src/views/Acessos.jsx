@@ -3,10 +3,12 @@ import React from "react";
 // reactstrap components
 import {Card, CardHeader, CardBody, Row, Col, Button} from "reactstrap";
 import AddAccessTable from "components/Tables/AddAccessTable";
-import EditModalidade from "components/Modals/EditAcessos";
+import editCredential from "components/Modals/EditAcessos";
 import NotificationAlert from "react-notification-alert";
 import axios from "axios";
 import AddModalidade from "components/Modals/AddAcessos";
+import EditAcessos from "../components/Modals/EditAcessos";
+import jwt from "jsonwebtoken";
 
 class Acessos extends React.Component {
 
@@ -15,25 +17,29 @@ class Acessos extends React.Component {
         this.state = {
             modalAdd: false,
             modalEdit: false,
-            modalidade: {},
-            modalidades: [],
+            acesso: {},
+            acessos: [],
             color: "navbar-transparent",
         };
         this.toggleModalEdit = this.toggleModalEdit.bind(this);
         this.toggleModalAdd = this.toggleModalAdd.bind(this);
-        this.saveModalidade = this.saveModalidade.bind(this);
-        this.editModalidade = this.editModalidade.bind(this);
-        this.removeModalidade = this.removeModalidade.bind(this);
-        this.updateModalidade = this.updateModalidade.bind(this);
+        this.addCredential = this.addCredential.bind(this);
+        this.editCredential = this.editCredential.bind(this);
+        this.removeCredential = this.removeCredential.bind(this);
+        this.updateCredential = this.updateCredential.bind(this);
         this.notify = this.notify.bind(this);
         this.refresh = this.refresh.bind(this);
     }
 
     componentDidMount() {
-        axios.get('https://taca-ua-nei.com/modalities')
+        var token = localStorage.getItem("smartRoom_JWT");
+        var decoded = jwt.verify(token, 'ThisIsSecretForJWTHS512SignatureAlgorithmThatMUSTHave512bitsKeySize');
+        var home = decoded.home
+        axios.get('https://ies-controller.herokuapp.com/acessos/' + home)
             .then(res => {
-                const modalidades = res.data;
-                this.setState({modalidades});
+                const acessos = res.data;
+                console.log(acessos)
+                this.setState({acessos});
             });
     }
 
@@ -94,28 +100,28 @@ class Acessos extends React.Component {
         });
     }
 
-    saveModalidade(data) {
-        axios.post('https://taca-ua-nei.com/add/modalidades/' + localStorage.getItem("taca_uaJWT"), data)
-            .then((res) => {
-                this.refresh(res.status === 200 ? "ADD" : "ERROR", res.data['Message'])
-            })
+    addCredential(data) {
+        var token = localStorage.getItem("smartRoom_JWT");
+        axios.post('https://iesapi.herokuapp.com/access/addCredential', data, {headers: {"Authorization": `Bearer ${token}`}}).then((res) => {
+            this.refresh(res.status === 200 ? "ADD" : "ERROR", "Adicionado com sucesso")
+        })
     }
 
-    editModalidade(modalidade) {
+   editCredential(modalidade) {
         this.setState({
             modalEdit: !this.state.modalEdit,
             modalidade: modalidade
         });
     }
 
-    removeModalidade(modalidade) {
+    removeCredential(modalidade) {
         axios.post('https://taca-ua-nei.com/remove/modalidades/' + localStorage.getItem("taca_uaJWT"), modalidade)
             .then(res => {
                 this.refresh(res.status === 200 ? "REMOVE" : "ERROR", res.data['Message'])
             });
     }
 
-    updateModalidade(data) {
+    updateCredential(data) {
         axios.post('https://taca-ua-nei.com/update/modalidades/' + localStorage.getItem("taca_uaJWT"), data)
             .then(res => {
                 this.refresh(res.status === 200 ? "EDIT" : "ERROR", res.data['Message'])
@@ -140,8 +146,8 @@ class Acessos extends React.Component {
                                     </Row>
                                 </CardHeader>
                                 <CardBody className="all-icons">
-                                    <AddAccessTable dados={this.state.modalidades} edit={this.editModalidade}
-                                                    remove={this.removeModalidade}/>
+                                    <AddAccessTable dados={this.state.acessos} edit={this.editCredential}
+                                                    remove={this.removeCredential}/>
                                     <Button icon round color="primary" onClick={this.toggleModalAdd} size="lg">
                                         <i class="fas fa-2x fa-plus"></i>
                                     </Button>
@@ -151,9 +157,9 @@ class Acessos extends React.Component {
                     </Row>
                 </div>
                 <AddModalidade status={this.state.modalAdd} handleClose={this.toggleModalAdd}
-                               handleSave={this.saveModalidade}/>
-                <EditModalidade status={this.state.modalEdit} handleClose={this.toggleModalEdit}
-                                handleUpdate={this.updateModalidade} info={this.state.modalidade}/>
+                               handleSave={this.addCredential}/>
+                <EditAcessos status={this.state.modalEdit} handleClose={this.toggleModalEdit}
+                                handleUpdate={this.updateCredential} info={this.state.acesso}/>
             </>
         );
     }

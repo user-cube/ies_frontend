@@ -11,11 +11,11 @@ class AddAccessTable extends React.Component {
         super(props);
         this.state = {
             alert: null,
-            equipas: props.dados,
+            acessos: props.dados,
             colums: [
                 {
                     Header: 'Nome',
-                    accessor: 'team',
+                    accessor: 'nome',
                     sortable: true,
                     filterable: true,
                     minWidth: 400,
@@ -26,7 +26,7 @@ class AddAccessTable extends React.Component {
                     }
                 }, {
                     Header: 'ID',
-                    accessor: 'logo',
+                    accessor: 'id',
                     sortable: false,
                     minWidth: 200,
                     style: {
@@ -34,8 +34,17 @@ class AddAccessTable extends React.Component {
                         height: "50px"
                     }
                 }, {
-                    Header: 'Permissões',
-                    accessor: 'mod',
+                    Header: 'Casa',
+                    accessor: 'casa',
+                    sortable: false,
+                    minWidth: 200,
+                    style: {
+                        textAlign: "center",
+                        height: "50px"
+                    }
+                }, {
+                    Header: 'Ação',
+                    accessor: 'actions',
                     sortable: false,
                     minWidth: 200,
                     style: {
@@ -48,26 +57,26 @@ class AddAccessTable extends React.Component {
         this.warningAlert = this.warningAlert.bind(this)
     }
 
-    handleEdit = (equipa) => {
-        this.props.edit(equipa)
+    handleEdit = (acesso) => {
+        this.props.edit(acesso)
     }
 
-    handleRemove = (equipa) => {
+    handleRemove = (acesso) => {
         this.setState({alert: null})
-        this.props.remove(equipa)
+        this.props.remove(acesso)
     }
 
     componentDidMount() {
-        this.setState({equipas: this.props.dados});
+        this.setState({acessos: this.props.dados});
     }
 
     componentDidUpdate(prevProps) {
         if (this.props.dados !== prevProps.dados) {
-            this.setState({equipas: this.props.dados});
+            this.setState({acessos: this.props.dados});
         }
     }
 
-    warningAlert(equipa) {
+    warningAlert(acesso) {
         this.setState({
             alert: (
                 <SweetAlert
@@ -78,7 +87,7 @@ class AddAccessTable extends React.Component {
                     confirmBtnBsStyle="danger"
                     cancelBtnBsStyle="default"
                     title="Are you sure?"
-                    onConfirm={() => this.handleRemove(equipa)}
+                    onConfirm={() => this.handleRemove(acesso)}
                     onCancel={() => this.setState({alert: null})}
                 >
                     You will not be able to recover!
@@ -96,18 +105,15 @@ class AddAccessTable extends React.Component {
         return (
             <>
                 <ReactTable
-                    data={this.state.equipas.map((equipa, index) => {
+                    data={this.state.acessos.map((acesso, index) => {
                         return ({
-                            team: equipa["equipa"],
-                            logo: equipa["logo"],
-                            mod: equipa["modalidades"].join(", "),
-                            nuc: equipa["nucleo"],
-                            sige: equipa["siglaE"],
-                            sign: equipa["siglaN"],
+                            nome: acesso["user"],
+                            id: acesso["cart_id"],
+                            casa: acesso["home"],
                             actions: (
                                 <div className="actions-center">
                                     <Button
-                                        onClick={() => this.handleEdit(equipa)}
+                                        onClick={() => this.handleEdit(acesso)}
                                         color="warning"
                                         size="sm"
                                         className="btn-icon btn-link edit"
@@ -115,7 +121,7 @@ class AddAccessTable extends React.Component {
                                         <i className="fa fa-edit"/>
                                     </Button>{" "}
                                     <Button
-                                        onClick={() => this.warningAlert(equipa)}
+                                        onClick={() => this.warningAlert(acesso)}
                                         color="danger"
                                         size="sm"
                                         className="btn-icon btn-link remove"

@@ -1,6 +1,8 @@
 import React from "react";
 
 import {Button, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup, Label, Input} from 'reactstrap';
+import axios from "axios";
+import jwt from "jsonwebtoken";
 
 class AddAcessos extends React.Component {
     constructor(props) {
@@ -8,18 +10,18 @@ class AddAcessos extends React.Component {
         this.state = {
             modal: props.status,
             nome: "",
-            logo: "",
+            acessoID : "",
+            home : 0,
             componentes: {},
-            ano: 0,
-            tipo: "Coletiva",
-            emptyNome: false,
-            emptyLogo: false,
-            emptyAno: false,
         }
         this.handleSave = this.handleSave.bind(this);
     }
 
     componentDidMount() {
+        var token = localStorage.getItem("smartRoom_JWT");
+        var decoded = jwt.verify(token, 'ThisIsSecretForJWTHS512SignatureAlgorithmThatMUSTHave512bitsKeySize');
+
+        this.setState({home : decoded.home})
         this.setState({
             modal: this.props.status,
         });
@@ -27,6 +29,18 @@ class AddAcessos extends React.Component {
 
     componentDidUpdate(prevProps) {
         if (this.props.status !== prevProps.status) {
+            var token = localStorage.getItem("smartRoom_JWT");
+
+            axios.get('https://iesapi.herokuapp.com/access/unauthorizedAccess', {headers: {"Authorization": `Bearer ${token}`}})
+                .then(res => {
+                    var acessos= [];
+                    acessos = res.data;
+                    console.log(acessos)
+                    acessos.forEach(valor => {
+                        console.log(valor['cart_id'])
+                        this.setState({acessoID : valor['cart_id'] })
+                    })
+                });
             this.setState({modal: this.props.status});
         }
     }
@@ -35,32 +49,15 @@ class AddAcessos extends React.Component {
         this.setState({nome: event.target.value, emptyNome: false});
     }
 
-    handleLogo = event => {
-        this.setState({logo: event.target.value, emptyLogo: false});
-    }
-
-    handleAno = event => {
-        this.setState({ano: parseInt(event.target.value), emptyAno: false});
-    }
-
-    handleTipo = event => {
-        this.setState({tipo: event.target.value});
-    }
-
     handleSave() {
+        console.log(this.state.nome)
         if (this.state.nome === "") {
             this.setState({emptyNome: true})
-        } else if (this.state.logo === "") {
-            this.setState({emptyLogo: true})
-        } else if (this.state.ano === "") {
-            this.setState({emptyAno: true})
-        } else {
+        }  else {
             const data = {
-                modalidade: this.state.nome,
-                logo: this.state.logo,
-                componentes: this.state.componentes,
-                tipo: this.state.tipo,
-                ano: this.state.ano
+                'cart_id': this.state.acessoID,
+                'home': this.state.home,
+                'user':this.state.nome
             };
             this.props.handleSave(data)
         }
@@ -85,23 +82,11 @@ class AddAcessos extends React.Component {
                                 Field can't be empty!
                             </div>
                             <FormGroup>
-                                <Label for="logo">ID</Label>
-                                <Input type="text" name="logo" id="logo" placeholder="ID do cartão"
-                                       value={this.state.logo} onChange={this.handleLogo}/>
+                                <Input type="text" name="logo" id="logo" placeholder="ID do cartão" disabled hidden value={this.state.acessoID}/>
                             </FormGroup>
-                            <div hidden={!this.state.emptyLogo} className="alert-danger mt-2 p-2"
-                                 style={{borderRadius: 30}}>
-                                Field can't be empty!
-                            </div>
                             <FormGroup>
-                                <Label for="ano">Permissões</Label>
-                                <Input type="number" name="ano" id="ano" placeholder="Permissões" value={this.state.ano}
-                                       onChange={this.handleAno}/>
+                                <Input type="number" name="ano" id="ano" placeholder="Permissões" value={this.state.home} disabled hidden/>
                             </FormGroup>
-                            <div hidden={!this.state.emptyAno} className="alert-danger mt-2 p-2"
-                                 style={{borderRadius: 30}}>
-                                Field can't be empty!
-                            </div>
                         </form>
                     </ModalBody>
                     <ModalFooter>
