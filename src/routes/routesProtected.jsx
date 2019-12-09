@@ -8,6 +8,7 @@ const Temperatura = lazy(() => import("views/Temperatura.jsx"));
 const AnaliseTemp = lazy(() => import("views/AnaliseTemp.jsx"));
 const AnaliseCO2 = lazy(() => import("views/AnaliseCO2.jsx"));
 const AnaliseAcessos = lazy(() => import("views/AnaliseAcessos.jsx"));
+const AnaliseHumidade = lazy(() => import("views/AnaliseHumidade.jsx"));
 
 var routes = [
     {
@@ -39,6 +40,19 @@ var routes = [
     {
         path: "/auth/co2",
         name: "Políticas de CO2",
+        sidebar: true,
+        icon: "fas fa-cloud",
+        component: CO2,
+    },{
+        path: "/auth/analiseHumidity",
+        name: "Análise de Humidade",
+        sidebar: true,
+        icon: "fab fa-cloudversify",
+        component: AnaliseHumidade,
+    },
+    {
+        path: "/auth/co2",
+        name: "Políticas de Humidade",
         sidebar: true,
         icon: "fas fa-cloud",
         component: CO2,
