@@ -5,9 +5,8 @@ import {
     Card,
     CardHeader,
     CardBody,
-    CardTitle,
     Row,
-    Col, Button,
+    Col,
 } from "reactstrap";
 
 import LastAcessos from "components/Tables/Acessos";
@@ -36,7 +35,6 @@ class Home extends React.Component {
                 this.setState({acessos: access});
             });
     }
-
     render() {
         return (
             <>

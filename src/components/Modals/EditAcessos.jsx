@@ -7,15 +7,10 @@ class EditAcessos extends React.Component {
         super(props);
         this.state = {
             modal: props.status,
-            modalidade: props.info,
-            nome: "",
-            logo: "",
-            componentes: {},
-            ano: 0,
-            tipo: "Coletiva",
-            emptyNome: false,
-            emptyLogo: false,
-            emptyAno: false,
+            acesso: props.info,
+            nome : "",
+            id : "",
+            casa : ""
         }
         this.handleUpdate = this.handleUpdate.bind(this);
         this.handleData = this.handleData.bind(this);
@@ -32,18 +27,17 @@ class EditAcessos extends React.Component {
             this.setState({modal: this.props.status});
         }
         if (this.props.info !== prevProps.info) {
-            this.setState({modalidade: this.props.info});
+            this.setState({acesso: this.props.info});
             this.handleData()
         }
     }
 
     handleData() {
+        console.log(this.props.info)
         this.setState({
-            nome: this.props.info.modalidade,
-            logo: this.props.info.logo,
-            componentes: this.props.info.componentes,
-            ano: this.props.info.ano,
-            tipo: this.props.info.tipo,
+            nome: this.props.info.user,
+            id : this.props.info.cart_id,
+            casa : this.props.info.home
         });
     }
 
@@ -71,14 +65,9 @@ class EditAcessos extends React.Component {
         } else if (this.state.ano === "") {
             this.setState({emptyAno: true})
         } else {
-            const data = {data_antiga: this.state.modalidade,
-                data_nova: {
-                    modalidade: this.state.nome,
-                    logo: this.state.logo,
-                    componentes: this.state.componentes,
-                    tipo: this.state.tipo,
-                    ano: this.state.ano
-                }
+            const data = {
+                    user : this.state.nome,
+                    cart_id : this.state.id
             };
             this.props.handleUpdate(data)
         }
@@ -89,13 +78,13 @@ class EditAcessos extends React.Component {
             <>
                 <Modal isOpen={this.state.modal} toggle={this.props.handleClose}>
                     <ModalHeader className="justify-content-center" toggle={this.props.handleClose}>
-                        Edit Modalidade
+                        Editar acesso
                     </ModalHeader>
                     <ModalBody>
                         <form>
                             <FormGroup>
                                 <Label for="nome">Nome</Label>
-                                <Input type="text" name="nome" id="nome" placeholder="Nome da Modalidade"
+                                <Input type="text" name="nome" id="nome" placeholder="Nome"
                                        value={this.state.nome} onChange={this.handleNome}/>
                             </FormGroup>
                             <div hidden={!this.state.emptyNome} className="alert-danger mt-2 p-2"
@@ -103,23 +92,13 @@ class EditAcessos extends React.Component {
                                 Field can't be empty!
                             </div>
                             <FormGroup>
-                                <Label for="logo">Logo</Label>
-                                <Input type="text" name="logo" id="logo" placeholder="Link do Logo"
-                                       value={this.state.logo} onChange={this.handleLogo}/>
+                                <Input type="text" name="logo" id="logo" placeholder="Link do Logo" disabled
+                                       value={this.state.casa} onChange={this.handleLogo}/>
                             </FormGroup>
-                            <div hidden={!this.state.emptyLogo} className="alert-danger mt-2 p-2"
-                                 style={{borderRadius: 30}}>
-                                Field can't be empty!
-                            </div>
                             <FormGroup>
-                                <Label for="ano">Ano</Label>
-                                <Input type="number" name="ano" id="ano" placeholder="Ano" value={this.state.ano}
+                                <Input type="number" name="ano" id="ano" placeholder="Ano" value={this.state.id} disabled
                                        onChange={this.handleAno}/>
                             </FormGroup>
-                            <div hidden={!this.state.emptyAno} className="alert-danger mt-2 p-2"
-                                 style={{borderRadius: 30}}>
-                                Field can't be empty!
-                            </div>
                         </form>
                     </ModalBody>
                     <ModalFooter>
