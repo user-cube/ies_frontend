@@ -23,6 +23,8 @@ class Home extends React.Component {
             temp_labels: [],
             temp_values: [],
             numero_acessos: [],
+            humidade_lables : [],
+            humidade_values : [],
             pessoas: [],
             acessos : [],
             endpoint: "https://ies-api.herokuapp.com/endPoint"
@@ -65,6 +67,22 @@ class Home extends React.Component {
                     lista_values.push(valor["temp"])
                 })
                 this.setState({temp_labels: lista_labels, temp_values: lista_values});
+            });
+
+        axios.get('https://iesapi.herokuapp.com/humidity/today', {headers: {"Authorization": `Bearer ${token}`}})
+            .then(res => {
+                var humidade = [];
+                humidade = res.data;
+                if (humidade.length === 0) {
+                    humidade = []
+                }
+                let lista_labels = [];
+                let lista_values = [];
+                humidade.forEach(valor => {
+                    lista_labels.push(valor["time"].split(".")[0])
+                    lista_values.push(valor["humidity"])
+                })
+                this.setState({humidade_labels: lista_labels, humidade_values: lista_values});
             });
 
         axios.get('https://iesapi.herokuapp.com/access/today', {headers: {"Authorization": `Bearer ${token}`}})
@@ -428,6 +446,101 @@ class Home extends React.Component {
                                                 }
                                             }}
                                         />
+                                    </div>
+                                </CardBody>
+                            </Card>
+                        </Col>
+                        <Col lg="4">
+                            <Card className="card-chart">
+                                <CardHeader>
+                                    <h5 className="card-category">Quarto de brinquedos</h5>
+                                    <CardTitle tag="h3">
+                                        <i className="tim-icons icon-bell-55 text-info"/>{" "}
+                                        Humidade
+                                    </CardTitle>
+                                </CardHeader>
+                                <CardBody>
+                                    <div className="chart-area">
+                                        <div className="chart-area">
+                                            <Line
+                                                data={canvas => {
+                                                    let ctx = canvas.getContext("2d");
+
+                                                    let gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
+
+                                                    gradientStroke.addColorStop(1, "rgba(29,140,248,0.2)");
+                                                    gradientStroke.addColorStop(0.4, "rgba(29,140,248,0.0)");
+                                                    gradientStroke.addColorStop(0, "rgba(29,140,248,0)"); //blue colors
+
+                                                    return {
+                                                        labels: this.state.humidade_labels,
+                                                        datasets: [
+                                                            {
+                                                                label: "Humidade",
+                                                                fill: true,
+                                                                backgroundColor: gradientStroke,
+                                                                borderColor: "#00d6b4",
+                                                                borderWidth: 2,
+                                                                borderDash: [],
+                                                                borderDashOffset: 0.0,
+                                                                pointBackgroundColor: "#00d6b4",
+                                                                pointBorderColor: "rgba(255,255,255,0)",
+                                                                pointHoverBackgroundColor: "#00d6b4",
+                                                                pointBorderWidth: 20,
+                                                                pointHoverRadius: 4,
+                                                                pointHoverBorderWidth: 15,
+                                                                pointRadius: 4,
+                                                                data: this.state.humidade_values
+                                                            }
+                                                        ]
+                                                    };
+                                                }}
+                                                options={{
+                                                    maintainAspectRatio: false,
+                                                    legend: {
+                                                        display: false
+                                                    },
+
+                                                    tooltips: {
+                                                        backgroundColor: "#f5f5f5",
+                                                        titleFontColor: "#333",
+                                                        bodyFontColor: "#666",
+                                                        bodySpacing: 4,
+                                                        xPadding: 12,
+                                                        mode: "nearest",
+                                                        intersect: 0,
+                                                        position: "nearest"
+                                                    },
+                                                    responsive: true,
+                                                    scales: {
+                                                        yAxes: [
+                                                            {
+                                                                barPercentage: 1.6,
+                                                                gridLines: {
+                                                                    drawBorder: false,
+                                                                    color: "rgba(29,140,248,0.0)",
+                                                                    zeroLineColor: "transparent"
+                                                                },
+
+                                                            }
+                                                        ],
+
+                                                        xAxes: [
+                                                            {
+                                                                barPercentage: 1.6,
+                                                                gridLines: {
+                                                                    drawBorder: false,
+                                                                    color: "rgba(0,242,195,0.1)",
+                                                                    zeroLineColor: "transparent"
+                                                                },
+
+                                                            }
+                                                        ]
+                                                    }
+                                                }}
+
+                                            />
+                                        </div>
                                     </div>
                                 </CardBody>
                             </Card>

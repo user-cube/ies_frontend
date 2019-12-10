@@ -35,10 +35,9 @@ class Acessos extends React.Component {
         var token = localStorage.getItem("smartRoom_JWT");
         var decoded = jwt.verify(token, 'ThisIsSecretForJWTHS512SignatureAlgorithmThatMUSTHave512bitsKeySize');
         var home = decoded.home
-        axios.get('https://ies-controller.herokuapp.com/acessos/' + home)
+        axios.get('https://iesapi.herokuapp.com/access/getCredentials', {headers: {"Authorization": `Bearer ${token}`}})
             .then(res => {
                 const acessos = res.data;
-                console.log(acessos)
                 this.setState({acessos});
             });
     }
@@ -107,25 +106,25 @@ class Acessos extends React.Component {
         })
     }
 
-   editCredential(modalidade) {
+   editCredential(acesso) {
         this.setState({
             modalEdit: !this.state.modalEdit,
-            modalidade: modalidade
+            acesso: acesso
         });
     }
 
-    removeCredential(modalidade) {
-        axios.post('https://taca-ua-nei.com/remove/modalidades/' + localStorage.getItem("taca_uaJWT"), modalidade)
-            .then(res => {
-                this.refresh(res.status === 200 ? "REMOVE" : "ERROR", res.data['Message'])
-            });
+    removeCredential(data) {
+        var token = localStorage.getItem("smartRoom_JWT");
+        axios.delete('https://iesapi.herokuapp.com/access/deleteCredential', {headers: {"Authorization": `Bearer ${token}`}, data:{'cart_id':data}}).then((res) => {
+            this.refresh(res.status === 200 ? "REMOVE" : "ERROR", "sucesso")
+        })
     }
 
     updateCredential(data) {
-        axios.post('https://taca-ua-nei.com/update/modalidades/' + localStorage.getItem("taca_uaJWT"), data)
-            .then(res => {
-                this.refresh(res.status === 200 ? "EDIT" : "ERROR", res.data['Message'])
-            });
+        var token = localStorage.getItem("smartRoom_JWT");
+        axios.put('https://iesapi.herokuapp.com/access/updateCredential', {'cart_id':data['cart_id'], 'user':data['user']}, {headers: {"Authorization": `Bearer ${token}`}}).then((res) => {
+            this.refresh(res.status === 200 ? "EDIT" : "ERROR", "sucesso")
+        })
     }
 
     render() {

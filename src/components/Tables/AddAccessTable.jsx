@@ -121,7 +121,7 @@ class AddAccessTable extends React.Component {
                                         <i className="fa fa-edit"/>
                                     </Button>{" "}
                                     <Button
-                                        onClick={() => this.warningAlert(acesso)}
+                                        onClick={() => this.warningAlert(acesso['cart_id'])}
                                         color="danger"
                                         size="sm"
                                         className="btn-icon btn-link remove"

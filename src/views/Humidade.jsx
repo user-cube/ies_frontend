@@ -35,7 +35,7 @@ class Acessos extends React.Component {
         var token = localStorage.getItem("smartRoom_JWT");
         var decoded = jwt.verify(token, 'ThisIsSecretForJWTHS512SignatureAlgorithmThatMUSTHave512bitsKeySize');
         var home = decoded.home
-        axios.get('https://ies-controller.herokuapp.com/acessos/' + home)
+        axios.get('https://iesapi.herokuapp.com/acessos/' + home)
             .then(res => {
                 const acessos = res.data;
                 console.log(acessos)
