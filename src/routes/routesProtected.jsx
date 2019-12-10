@@ -50,14 +50,14 @@ var routes = [
         sidebar: true,
         icon: "fas fa-tint",
         component: AnaliseHumidade,
-    },
+    },/**
     {
         path: "/auth/humidity",
         name: "Políticas de Humidade",
         sidebar: true,
         icon: "fas fa-tint-slash",
         component: Humidade,
-    },{
+    },**/{
         path: "/auth/analiseTemp",
         name: "Análise de Temperatura",
         sidebar: true,
