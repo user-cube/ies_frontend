@@ -69,12 +69,12 @@ class Acessos extends React.Component {
                 this.componentDidMount()
                 break
             case "REMOVE":
-                this.notify("Modalidade removido com " + msg)
+                this.notify("Utilizador removido com " + msg)
                 this.componentDidMount()
                 break
             case "EDIT":
                 this.toggleModalEdit()
-                this.notify("Modalidade atualizado com " + msg)
+                this.notify("Utilizador atualizado com " + msg)
                 this.componentDidMount()
                 break
             case "ERROR":
