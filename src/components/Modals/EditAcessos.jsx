@@ -92,11 +92,11 @@ class EditAcessos extends React.Component {
                                 Field can't be empty!
                             </div>
                             <FormGroup>
-                                <Input type="text" name="logo" id="logo" placeholder="Link do Logo" disabled
+                                <Input type="text" name="logo" id="logo" placeholder="Link do Logo" disabled hidden
                                        value={this.state.casa} onChange={this.handleLogo}/>
                             </FormGroup>
                             <FormGroup>
-                                <Input type="number" name="ano" id="ano" placeholder="Ano" value={this.state.id} disabled
+                                <Input type="number" name="ano" id="ano" placeholder="Ano" value={this.state.id} disabled hidden
                                        onChange={this.handleAno}/>
                             </FormGroup>
                         </form>

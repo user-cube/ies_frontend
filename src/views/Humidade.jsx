@@ -102,7 +102,7 @@ class Acessos extends React.Component {
 
     addCredential(data) {
         var token = localStorage.getItem("smartRoom_JWT");
-        axios.post('https://iesapi.herokuapp.com/access/addCredential', data, {headers: {"Authorization": `Bearer ${token}`}}).then((res) => {
+        axios.post('https://iesapi.herokuapp.com/access/credential', data, {headers: {"Authorization": `Bearer ${token}`}}).then((res) => {
             this.refresh(res.status === 200 ? "ADD" : "ERROR", "sucesso")
         })
     }
