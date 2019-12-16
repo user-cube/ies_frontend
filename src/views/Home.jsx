@@ -37,7 +37,7 @@ class Home extends React.Component {
     componentDidMount() {
         var token = localStorage.getItem("smartRoom_JWT");
 
-        axios.get('https://iesapi.herokuapp.com/co2/today', {headers: {"Authorization": `Bearer ${token}`}})
+        axios.get('http://deti-engsoft-02.ua.pt:3000/co2/today', {headers: {"Authorization": `Bearer ${token}`}})
             .then(res => {
                 var co2 = [];
                 co2 = res.data;
@@ -53,7 +53,7 @@ class Home extends React.Component {
                 this.setState({co2_labels: lista_labels, co2_values: lista_values});
             });
 
-        axios.get('https://iesapi.herokuapp.com/temperature/today', {headers: {"Authorization": `Bearer ${token}`}})
+        axios.get('http://deti-engsoft-02.ua.pt:3000/temperature/today', {headers: {"Authorization": `Bearer ${token}`}})
             .then(res => {
                 var temp = [];
                 temp = res.data;
@@ -69,7 +69,7 @@ class Home extends React.Component {
                 this.setState({temp_labels: lista_labels, temp_values: lista_values});
             });
 
-        axios.get('https://iesapi.herokuapp.com/humidity/today', {headers: {"Authorization": `Bearer ${token}`}})
+        axios.get('http://deti-engsoft-02.ua.pt:3000/humidity/today', {headers: {"Authorization": `Bearer ${token}`}})
             .then(res => {
                 var humidade = [];
                 humidade = res.data;
@@ -85,7 +85,7 @@ class Home extends React.Component {
                 this.setState({humidade_labels: lista_labels, humidade_values: lista_values});
             });
 
-        axios.get('https://iesapi.herokuapp.com/access/today', {headers: {"Authorization": `Bearer ${token}`}})
+        axios.get('http://deti-engsoft-02.ua.pt:3000/access/today', {headers: {"Authorization": `Bearer ${token}`}})
             .then(res => {
                 var access = [];
                 access = res.data;

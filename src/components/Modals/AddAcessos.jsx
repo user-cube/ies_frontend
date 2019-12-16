@@ -31,7 +31,7 @@ class AddAcessos extends React.Component {
         if (this.props.status !== prevProps.status) {
             var token = localStorage.getItem("smartRoom_JWT");
 
-            axios.get('https://iesapi.herokuapp.com/access/unauthorized/last', {headers: {"Authorization": `Bearer ${token}`}})
+            axios.get('http://deti-engsoft-02.ua.pt:3000/access/unauthorized/last', {headers: {"Authorization": `Bearer ${token}`}})
                 .then(res => {
                     var acessos= [];
                     acessos = res.data;

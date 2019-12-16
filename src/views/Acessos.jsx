@@ -35,7 +35,7 @@ class Acessos extends React.Component {
         var token = localStorage.getItem("smartRoom_JWT");
         var decoded = jwt.verify(token, 'ThisIsSecretForJWTHS512SignatureAlgorithmThatMUSTHave512bitsKeySize');
         var home = decoded.home
-        axios.get('https://iesapi.herokuapp.com/access/credential', {headers: {"Authorization": `Bearer ${token}`}})
+        axios.get('http://deti-engsoft-02.ua.pt:3000/access/credential', {headers: {"Authorization": `Bearer ${token}`}})
             .then(res => {
                 const acessos = res.data;
                 this.setState({acessos});
@@ -101,7 +101,7 @@ class Acessos extends React.Component {
 
     addCredential(data) {
         var token = localStorage.getItem("smartRoom_JWT");
-        axios.post('https://iesapi.herokuapp.com/access/credential', data, {headers: {"Authorization": `Bearer ${token}`}}).then((res) => {
+        axios.post('http://deti-engsoft-02.ua.pt:3000/access/credential', data, {headers: {"Authorization": `Bearer ${token}`}}).then((res) => {
             this.refresh(res.status === 200 ? "ADD" : "ERROR", "sucesso")
         })
     }
@@ -115,14 +115,14 @@ class Acessos extends React.Component {
 
     removeCredential(data) {
         var token = localStorage.getItem("smartRoom_JWT");
-        axios.delete('https://iesapi.herokuapp.com/access/credential', {headers: {"Authorization": `Bearer ${token}`}, data:{'cart_id':data}}).then((res) => {
+        axios.delete('http://deti-engsoft-02.ua.pt:3000/access/credential', {headers: {"Authorization": `Bearer ${token}`}, data:{'cart_id':data}}).then((res) => {
             this.refresh(res.status === 200 ? "REMOVE" : "ERROR", "sucesso")
         })
     }
 
     updateCredential(data) {
         var token = localStorage.getItem("smartRoom_JWT");
-        axios.put('https://iesapi.herokuapp.com/access/credential', {'cart_id':data['cart_id'], 'user':data['user']}, {headers: {"Authorization": `Bearer ${token}`}}).then((res) => {
+        axios.put('http://deti-engsoft-02.ua.pt:3000/access/credential', {'cart_id':data['cart_id'], 'user':data['user']}, {headers: {"Authorization": `Bearer ${token}`}}).then((res) => {
             this.refresh(res.status === 200 ? "EDIT" : "ERROR", "sucesso")
         })
     }

@@ -10,7 +10,7 @@ class Footer extends React.Component {
                     <div className="copyright">
                         © {new Date().getFullYear()} made by{" "}
                         <a
-                            href="https://iesfrontend.herokuapp.com/"
+                            href="http://deti-engsoft-02.ua.pt:5000"
                             rel="noopener noreferrer"
                             target="_blank"
                         >

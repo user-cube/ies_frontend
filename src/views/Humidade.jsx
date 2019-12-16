@@ -35,7 +35,7 @@ class Acessos extends React.Component {
         var token = localStorage.getItem("smartRoom_JWT");
         var decoded = jwt.verify(token, 'ThisIsSecretForJWTHS512SignatureAlgorithmThatMUSTHave512bitsKeySize');
         var home = decoded.home
-        axios.get('https://iesapi.herokuapp.com/acessos/' + home)
+        axios.get('http://deti-engsoft-02.ua.pt:3000/acessos/' + home)
             .then(res => {
                 const acessos = res.data;
                 console.log(acessos)
@@ -102,7 +102,7 @@ class Acessos extends React.Component {
 
     addCredential(data) {
         var token = localStorage.getItem("smartRoom_JWT");
-        axios.post('https://iesapi.herokuapp.com/access/credential', data, {headers: {"Authorization": `Bearer ${token}`}}).then((res) => {
+        axios.post('http://deti-engsoft-02.ua.pt:3000/access/credential', data, {headers: {"Authorization": `Bearer ${token}`}}).then((res) => {
             this.refresh(res.status === 200 ? "ADD" : "ERROR", "sucesso")
         })
     }

@@ -29,7 +29,7 @@ Dado as especificidade do Heroku, o deploy é mais rápido e simples quando o c�
 Existen mecanismos de CI/CD implementados.
 No que diz respeito a CI, foi feito integração com o Github Actions que trata de todo o processo de CI.
 O CD ficou a cargo do Heroku que, após o Github Actions dar um parecer positivo, inicia o seu processo de deployment.
-
+http://deti-engsoft-02.ua.pt:5000
 ### Cloud AMQP
 Uma vez que colocamos todos os serviços fora da UA, tivemos de recorrer ao alojamento do rabbit também fora da UA, para isso usamos a Cloud AMQP serviço fornecido pelos criadores do RabbitMQ.
 

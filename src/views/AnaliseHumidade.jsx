@@ -19,7 +19,7 @@ class AnaliseCO2 extends React.Component {
 
         var token = localStorage.getItem("smartRoom_JWT");
 
-        axios.get('https://iesapi.herokuapp.com/humidity/average/week', { headers: {"Authorization" : `Bearer ${token}`} })
+        axios.get('http://deti-engsoft-02.ua.pt:3000/humidity/average/week', { headers: {"Authorization" : `Bearer ${token}`} })
             .then(res => {
                 const co2 = res.data;
                 let lista_labels = [];
