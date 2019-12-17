@@ -43,15 +43,67 @@ Este repositório tem integração CI/CD. A parte de CI é tratada pelo Github A
 O deploy do protótipo pode ser encontrado <a href='deti-engsoft-02.ua.pt:5000'>aqui</a>.<br>
 **Nota:** É necessário estar conectado na rede da UA (ou VPN) para aceder ao mesmo.
 
-### Especificação
-* Desenvolvido em React + Node;
-* Contém PWA;
-* Necssita de credenciais para o login.
+### Frontend
+Tal como mencionado anteriormente, o react encontra-se deployed no Heroku.
+Não existe qualquer tipo de informação que possa ser acedida sem login.
 
-### Estado do frontend
+#### Login
+O login foi acente em JWT, JSON Web Token. O JWT é emitido pela API Spring e armazenado em localstorage. 
+A proteção das rotas foi feita com Redux.
+Uma das contas existentes é:
+* **Email** - `ruicoelho@ua.pt`
+* **Password** - `test`
+<img src="presentation/Login.png">
+
+#### Home
+Assim que o login é feito com sucesso somos redirecionados para a homepage onde nos são apresentados 4 gráficos:
+* **Temperatura** - Onde podemos ver os dados de temperatura do dia. É de salientar que os eixos são ajustados de forma automática dependendo estes dos valores que são fornecidos pela API.
+* **CO2** - Onde podemos ver os dados de CO2 do dia. É de salientar que os eixos são ajustados de forma automática dependendo estes dos valores que são fornecidos pela API.
+* **Acessos** - Onde podemos ver o número de acessos das pessoas no dia. É de salientar que os eixos são ajustados de forma automática dependendo estes dos valores que são fornecidos pela API.
+* **Humidade** - Onde podemos ver os dados de humidade do dia. É de salientar que os eixos são ajustados de forma automática dependendo estes dos valores que são fornecidos pela API.
 <img src="presentation/Home.png">
+
+#### Análise de acessos
+Nesta tab podemos ver os acessos autorizados que foram feitos. É de notar que a pesquisa nas tabelas está funcional, a mesma depende do json inicial que é retornado pela API.
 <img src="presentation/Acessos.png">
+
+#### Gestão de acessos
+Esta tab permite tudo aquilo que é relacionado com a gestão de acessos, isto é, editar o nome das pessoas, remover acessos e adicionar acessos.
+
+##### Adicionar Acessos
+Carregando no botão de + temos a possibilidade de adicionar o último acesso não autorizado que foi realizado, isto é, a API retorna o ID do último acesso não autorizado e, adicionando o nome da pessoa a que ele corresponde, podemos guardar o mesmo.
+<img src="presentation/AddAcesso.png">
+
+##### Editar acesso
+Carregando em qualquer um dos botões de editar é nos aberto um modal do qual temos a opção de editar o nome da pessoa com o acesso, essa é a única informação que o utilizador tem permissão para efetuar.
+<img src="presentation/EditAcessos.png">
+
+##### Remover acesso
+Carregando em qualquer um dos botões de remover é nos aberto um modal para evitar que os 'missclicks', assim, sempre que tentamos apagar alguém da base de dados, somos obrigados a confirmar que essa é mesmo a ação que queremos tomar.
+<img src="presentation/DeleteAcesso.png">
+
+#### Análise de CO2
+Nesta tab podemos ver a média dos últimos 7 dias dos valores de CO2. Esta agregação é retornada pela API.
 <img src="presentation/CO2.png">
-<img src="presentation/CO2Add.png">
+
+#### Análise de Temperatura
+Nesta tab podemos ver a média dos últimos 7 dias dos valores de Temperatura. Esta agregação é retornada pela API.
 <img src="presentation/Temperatura.png">
+
+#### Análise de Humidade
+Nesta tab podemos ver a média dos últimos 7 dias dos valores de Humidade. Esta agregação é retornada pela API.
+<img src="presentation/Humidade.png">
+
+#### PWA
+Uma vez que não implementamos uma APP Android apesar de termos começado a mesma, esta app abriria a porta, como não ficou 100% funcional, decidimos não entregar a mesma.
+<img src="presentation/PWA_Install.png">
+Assim, fizemos uma PWA otimizada para telemóveis.
+Salientamos:
+* Design responsivo
+* Menu funciona com swipe right para abrir
+* Menu funciona com tap para fechar
+<img src="presentation/pwa.png">
+
+#### White Theme
+Quando desenvolvemos esta dashboard pensamos em todo o tipo de utilizadores, por isso, decidimos implementar a dashboard com um night theme que é o aberto por default, contudo, o utilizador se preferir pode escolher o light theme. Estas definições são guardadas e, quando o utilizador abre novamente o website, elas são carregadas.
 <img src="presentation/White.png">

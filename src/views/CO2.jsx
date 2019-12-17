@@ -5,7 +5,6 @@ import {Card, CardHeader, CardBody, Row, Col, Button} from "reactstrap";
 import ModalidadesTables from "components/Tables/CO2Table";
 import EditModalidade from "components/Modals/EditCO2";
 import NotificationAlert from "react-notification-alert";
-import axios from "axios";
 import AddModalidade from "components/Modals/AddCO2";
 
 class Modalidades extends React.Component {
@@ -27,14 +26,6 @@ class Modalidades extends React.Component {
         this.updateModalidade = this.updateModalidade.bind(this);
         this.notify = this.notify.bind(this);
         this.refresh = this.refresh.bind(this);
-    }
-
-    componentDidMount() {
-        axios.get('https://taca-ua-nei.com/modalities')
-            .then(res => {
-                const modalidades = res.data;
-                this.setState({modalidades});
-            });
     }
 
     notify = (msg) => {
@@ -94,12 +85,6 @@ class Modalidades extends React.Component {
         });
     }
 
-    saveModalidade(data) {
-        axios.post('https://taca-ua-nei.com/add/modalidades/' + localStorage.getItem("taca_uaJWT"), data)
-            .then((res) => {
-                this.refresh(res.status === 200 ? "ADD" : "ERROR", res.data['Message'])
-            })
-    }
 
     editModalidade(modalidade) {
         this.setState({
@@ -108,19 +93,7 @@ class Modalidades extends React.Component {
         });
     }
 
-    removeModalidade(modalidade) {
-        axios.post('https://taca-ua-nei.com/remove/modalidades/' + localStorage.getItem("taca_uaJWT"), modalidade)
-            .then(res => {
-                this.refresh(res.status === 200 ? "REMOVE" : "ERROR", res.data['Message'])
-            });
-    }
 
-    updateModalidade(data) {
-        axios.post('https://taca-ua-nei.com/update/modalidades/' + localStorage.getItem("taca_uaJWT"), data)
-            .then(res => {
-                this.refresh(res.status === 200 ? "EDIT" : "ERROR", res.data['Message'])
-            });
-    }
 
     render() {
         return (

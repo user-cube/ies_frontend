@@ -3,7 +3,6 @@ import React from "react";
 // reactstrap components
 import {Card, CardHeader, CardBody, Row, Col, Button} from "reactstrap";
 import AddAccessTable from "components/Tables/AddAccessTable";
-import editCredential from "components/Modals/EditAcessos";
 import NotificationAlert from "react-notification-alert";
 import axios from "axios";
 import AddModalidade from "components/Modals/AddAcessos";
@@ -112,20 +111,6 @@ class Acessos extends React.Component {
             modalEdit: !this.state.modalEdit,
             modalidade: modalidade
         });
-    }
-
-    removeCredential(modalidade) {
-        axios.post('https://taca-ua-nei.com/remove/modalidades/' + localStorage.getItem("taca_uaJWT"), modalidade)
-            .then(res => {
-                this.refresh(res.status === 200 ? "REMOVE" : "ERROR", res.data['Message'])
-            });
-    }
-
-    updateCredential(data) {
-        axios.post('https://taca-ua-nei.com/update/modalidades/' + localStorage.getItem("taca_uaJWT"), data)
-            .then(res => {
-                this.refresh(res.status === 200 ? "EDIT" : "ERROR", res.data['Message'])
-            });
     }
 
     render() {

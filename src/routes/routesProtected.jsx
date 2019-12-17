@@ -3,13 +3,10 @@ import {lazy} from "react";
 const Home = lazy(() => import("views/Home.jsx"));
 const Logout = lazy(() => import("views/Logout.jsx"));
 const Acessos = lazy(() => import("views/Acessos.jsx"));
-const CO2 = lazy(() => import("views/CO2.jsx"));
-const Temperatura = lazy(() => import("views/Temperatura.jsx"));
 const AnaliseTemp = lazy(() => import("views/AnaliseTemp.jsx"));
 const AnaliseCO2 = lazy(() => import("views/AnaliseCO2.jsx"));
 const AnaliseAcessos = lazy(() => import("views/AnaliseAcessos.jsx"));
 const AnaliseHumidade = lazy(() => import("views/AnaliseHumidade.jsx"));
-const Humidade = lazy(() => import("views/Humidade.jsx"));
 
 var routes = [
     {
@@ -39,37 +36,18 @@ var routes = [
         component: AnaliseCO2,
     },
     {
-        path: "/auth/co2",
-        name: "Políticas de CO2",
-        sidebar: true,
-        icon: "fas fa-cloud",
-        component: CO2,
-    },{
         path: "/auth/analiseHumidity",
         name: "Análise de Humidade",
         sidebar: true,
         icon: "fas fa-tint",
         component: AnaliseHumidade,
-    },/**
+    },
     {
-        path: "/auth/humidity",
-        name: "Políticas de Humidade",
-        sidebar: true,
-        icon: "fas fa-tint-slash",
-        component: Humidade,
-    },**/{
         path: "/auth/analiseTemp",
         name: "Análise de Temperatura",
         sidebar: true,
         icon: "fas fa-temperature-high",
         component: AnaliseTemp,
-    },
-    {
-        path: "/auth/temperatura",
-        name: "Políticas de Temperatura",
-        sidebar: true,
-        icon: "fas fa-thermometer-full",
-        component: Temperatura,
     },
     {
         path: "/auth/logout",

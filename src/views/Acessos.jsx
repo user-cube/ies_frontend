@@ -3,12 +3,10 @@ import React from "react";
 // reactstrap components
 import {Card, CardHeader, CardBody, Row, Col, Button} from "reactstrap";
 import AddAccessTable from "components/Tables/AddAccessTable";
-import editCredential from "components/Modals/EditAcessos";
 import NotificationAlert from "react-notification-alert";
 import axios from "axios";
 import AddModalidade from "components/Modals/AddAcessos";
 import EditAcessos from "../components/Modals/EditAcessos";
-import jwt from "jsonwebtoken";
 
 class Acessos extends React.Component {
 
@@ -33,8 +31,6 @@ class Acessos extends React.Component {
 
     componentDidMount() {
         var token = localStorage.getItem("smartRoom_JWT");
-        var decoded = jwt.verify(token, 'ThisIsSecretForJWTHS512SignatureAlgorithmThatMUSTHave512bitsKeySize');
-        var home = decoded.home
         axios.get('https://iesapi.herokuapp.com/access/credential', {headers: {"Authorization": `Bearer ${token}`}})
             .then(res => {
                 const acessos = res.data;

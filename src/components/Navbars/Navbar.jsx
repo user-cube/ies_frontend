@@ -1,6 +1,6 @@
 import React from "react";
 import classNames from "classnames";
-import taca_logo from "assets/img/smart-room.png"
+import logo from "assets/img/smart-room.png"
 
 import {
     NavbarBrand,
@@ -73,7 +73,7 @@ class MainNavbar extends React.Component {
                                 className="logo-text align-middle"
                             >
                                 <div className="photo">
-                                    <img src={taca_logo} className="mr-3" alt="taça UA logo"/>
+                                    <img src={logo} className="mr-3" alt="taça UA logo"/>
                                 </div>
                                 Smart Room
                             </h3>
